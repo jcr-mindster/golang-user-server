@@ -19,6 +19,7 @@ var (
 		&User{ID: 0, FirstName: "Jacob", LastName: "Crawford", Age: 28, Address: "Reginehøjvej 5"},
 		&User{ID: 1, FirstName: "Jacob", LastName: "Clausen", Age: 44, Address: "Sønderholt 30"},
 		&User{ID: 2, FirstName: "Jacob", LastName: "Nielsen", Age: 25, Address: "Kalmargade 46"},
+		&User{ID: 2, FirstName: "Jacob", LastName: "Hansen", Age: 34, Address: "Brabrandvej 46"},
 	}
 	nextID = 1
 )
