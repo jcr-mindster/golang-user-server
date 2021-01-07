@@ -1,5 +1,7 @@
 FROM golang:rc-buster
 
+LABEL version="0.1.0"
+
 COPY . /target
 
 WORKDIR /target
