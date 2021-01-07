@@ -48,14 +48,26 @@ func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (uc userController) getMore(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	filters, present := query["age"]
-	if present {
-		query := filters[0]
+	ageFilters, ageFilterPresent := query["age"]
+	ageBelowFilters, ageBelowFilterPresent := query["ageBelow"]
+	if ageFilterPresent && ageBelowFilterPresent {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("To many query parameters present"))
+	} else if ageFilterPresent {
+		query := ageFilters[0]
 		filterAge, err := strconv.Atoi(query)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 		} else {
 			encodeResponseAsJSON(models.GetUsersOfAge(filterAge), w)
+		}
+	} else if ageBelowFilterPresent {
+		query := ageBelowFilters[0]
+		filterBelowAge, err := strconv.Atoi(query)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+		} else {
+			encodeResponseAsJSON(models.GetUsersBelowAge(filterBelowAge), w)
 		}
 	} else {
 		encodeResponseAsJSON(models.GetUsers(), w)

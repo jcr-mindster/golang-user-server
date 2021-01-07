@@ -61,6 +61,17 @@ func GetUsersOfAge(age int) []*User {
 	return usersWithAge
 }
 
+// GetUsersBelowAge is a function that returns all users below a given age
+func GetUsersBelowAge(age int) []*User {
+	usersBelowAge := make([]*User, 0)
+	for _, u := range users {
+		if u.Age < age {
+			usersBelowAge = append(usersBelowAge, u)
+		}
+	}
+	return usersBelowAge
+}
+
 // UpdateUser is
 func UpdateUser(u User) (User, error) {
 	for i, cand := range users {
